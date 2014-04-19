@@ -133,6 +133,15 @@ def time_to_str(time_val):
     """
     return time.strftime(RFC_2822_TIME_FMT, time.gmtime(time_val))
 
+
+def fuzzy_str_to_time(str_time):
+    from datetime import datetime
+    from dateutil.parser import parse
+
+    return (parse(str_time, fuzzy=True) -
+            datetime.utcfromtimestamp(0)).total_seconds()
+
+
 def str_to_time(str_time):
     """Convert an RFC 2822-fomatted string into a time value.
 

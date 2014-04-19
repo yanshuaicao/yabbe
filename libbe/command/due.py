@@ -75,7 +75,7 @@ class Due (libbe.command.Command):
             if params['due'] == 'none':
                 remove_due(bug)
             else:
-                due_time = libbe.util.utility.str_to_time(params['due'])
+                due_time = libbe.util.utility.fuzzy_str_to_time(params['due'])
                 set_due(bug, due_time)
 
     def _long_help(self):
@@ -91,8 +91,8 @@ def _generate_due_string(time):
 
 def _parse_due_string(string):
     assert string.startswith(DUE_TAG)
-    return libbe.util.utility.str_to_time(string[len(DUE_TAG):])
-
+#    return libbe.util.utility.str_to_time(string[len(DUE_TAG):])
+    return libbe.util.utility.fuzzy_str_to_time(string[len(DUE_TAG):])
 # functions exposed to other modules
 
 def get_due(bug):
